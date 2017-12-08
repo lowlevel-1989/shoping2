@@ -30,7 +30,7 @@
 				<span>Password<label>*</label></span>
 				{{ form.password }}
 			</div>
-			<a class="forgot" href="#">Forgot Your Password?</a>
+			<a class="forgot" href="{% url 'password_reset' %}">Forgot Your Password?</a>
 			<input type="submit" value="Login">
 		</form>
 	</div>
