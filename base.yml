@@ -1,12 +1,5 @@
 version: "2"
 services:
-  app:
-    build: ./app
-    volumes:
-      - ./app:/app
-    env_file: .env
-    command: sh ./scripts/app.sh
-
   nginx:
     build: ./nginx
     ports:
@@ -20,6 +13,14 @@ services:
 
   redis:
     image: redis:4.0
+
+  app:
+    build: ./app
+    volumes:
+      - ./app:/app
+    env_file: .env
+    restart: on-failure
+    command: sh ./scripts/app.sh
 
   worker:
     build: ./app

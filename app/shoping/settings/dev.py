@@ -3,10 +3,9 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=True
 
-INTERNAL_IPS = (
-    'localhost',
-    '127.0.0.1',
-)
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda self: True
+}
 
 INSTALLED_APPS = [
     'django_extensions',
@@ -17,16 +16,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ] + MIDDLEWARE
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Static files (CSS, JavaScript, Images)

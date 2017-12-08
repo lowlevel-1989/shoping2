@@ -7,6 +7,16 @@ services:
     links:
       - app
 
+  postgres:
+    extends:
+      file: base.yml
+      service: postgres
+
+  redis:
+    extends:
+      file: base.yml
+      service: redis
+
   app:
     extends:
       file: base.yml
@@ -40,12 +50,3 @@ services:
       - redis
       - postgres
 
-  postgres:
-    extends:
-      file: base.yml
-      service: postgres
-
-  redis:
-    extends:
-      file: base.yml
-      service: redis

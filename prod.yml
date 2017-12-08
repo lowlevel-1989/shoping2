@@ -19,6 +19,9 @@ services:
     links:
       - redis
       - postgres
+    depends_on:
+      - postgres
+      - redis
 
   worker:
     extends:
@@ -30,6 +33,8 @@ services:
     links:
       - redis
       - postgres
+    depends_on:
+      - app
 
   beat:
     extends:
@@ -38,6 +43,8 @@ services:
     build:
       args:
         - DJANGO_ENV=prod
+    depends_on:
+      - worker
 
   postgres:
     extends:

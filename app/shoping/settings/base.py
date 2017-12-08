@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+INSTALLED_APPS = [
+    'shoping.apps.core',
+] + INSTALLED_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -67,6 +71,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'formatcom.wsgi.application'
+
+# Database
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':     os.environ.get('POSTGRES_DB',       ''),
+        'USER':     os.environ.get('POSTGRES_USER',     ''),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST':     'postgres',
+        'PORT':     '5432',
+    }
+}
 
 
 # Password validation
@@ -101,6 +119,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+LOGIN_REDIRECT_URL='/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
