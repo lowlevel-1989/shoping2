@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+
+
+{% load static %}
+{% block content %}
+<div class="register register-but">
+	<form action="{% url 'register' %}" method="post">
+		{% csrf_token %}
+		{{ form.non_field_errors }}
+		<div class="register-top-grid">
+			<h3>PERSONAL INFORMATION</h3>
+			<div>
+				{{ form.first_name.errors }}
+				<span>First Name<label>*</label></span>
+				{{ form.first_name }}
+			</div>
+			<div>
+				{{ form.last_name.errors }}
+				<span>Last Name<label>*</label></span>
+				{{ form.last_name }}
+			</div>
+			<div>
+				{{ form.email.errors }}
+				<span>Email Address<label>*</label></span>
+				{{ form.email }}
+			</div>
+		</div>
+
+		<div class="clearfix"> </div>
+		<div class="register-bottom-grid">
+			<h3>LOGIN INFORMATION</h3>
+			<div>
+				{{ form.password1.errors }}
+				<span>Password<label>*</label></span>
+				{{ form.password1 }}
+			</div>
+			<div>
+				{{ form.password2.errors }}
+				<span>Confirm Password<label>*</label></span>
+				{{ form.password2 }}
+			</div>
+			<div>
+				{{ form.username.errors }}
+				<span>Username<label>*</label></span>
+				{{ form.username }}
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+		<input type="submit" value="submit">
+		<div class="clearfix"> </div>
+		</div>
+	</form>
+</div>
+
+{% endblock content %}

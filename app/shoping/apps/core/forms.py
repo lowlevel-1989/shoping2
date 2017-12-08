@@ -7,6 +7,17 @@ class UserCreationForm(UserForm):
     last_name = forms.CharField(max_length=150, required=True)
     email = forms.EmailField(required=True)
 
+    def clean_email(self):
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).\
+            exclude(username=username).exists():
+
+            raise forms.ValidationError(u'Email addresses must be unique.')
+
+        return email
+
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'username', )
