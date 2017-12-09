@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load get_quantity %}
+{% block content %}
+
+<br />
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in object_list %}
+		<tr>
+			<td>{{ item.name }}</td>
+			<td>{{ item.price }} COP</td>
+			<td>{{ item.pk | get_quantity:object_qt_list }}</td>
+			<td><span style="cursor:pointer" class="label label-danger">delete</span></td>
+		</tr>
+		{% empty %}
+			<div class="col-sm-12">No hay articulos todavia.</div>
+		{% endfor %}
+		<tr>
+			<td class="align-right" colspan="3"><strong>total:<strong> {{ total }} COP</td>
+		</tr>
+	</tbody>
+</table>
+{% endblock content %}

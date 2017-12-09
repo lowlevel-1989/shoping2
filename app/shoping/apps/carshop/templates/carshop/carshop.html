@@ -1,0 +1,28 @@
+{% load static %}
+<div class="apparel_box">
+
+	<ul class="login">
+		<li class="login_text"><a href="{% url 'login' %}">Login</a></li>
+		<li class="wish"><a href="{% url 'carshop' %}">Wish List</a></li>
+		<div class='clearfix'></div>
+	</ul>
+
+	<div class="cart_bg">
+		<ul class="cart">
+			<i class="cart_icon"></i><p class="cart_desc">$1459.50<br><span class="yellow">2 items</span></p>
+			<div class='clearfix'></div>
+		</ul>
+		<ul class="product_control_buttons">
+			<li><a href="{% url 'carshop' %}"><img src="{% static 'core/images/close.png' %}" alt=""/></a></li>
+			<li><a href="{% url 'carshop' %}">Edit</a></li>
+		</ul>
+		<div class='clearfix'></div>
+	</div>
+
+	<ul class="quick_access">
+		<li class="view_cart"><a href="{% url 'carshop' %}">View Cart</a></li>
+		<li class="check"><a href="{% url 'carshop' %}">Checkout</a></li>
+		<div class='clearfix'></div>
+	</ul>
+
+</div>

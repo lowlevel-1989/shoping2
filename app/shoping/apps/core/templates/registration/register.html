@@ -3,6 +3,7 @@
 
 {% load static %}
 {% block content %}
+
 <div class="register register-but">
 	<form action="{% url 'register' %}" method="post">
 		{% csrf_token %}

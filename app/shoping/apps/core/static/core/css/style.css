@@ -1276,7 +1276,7 @@ ul.product-qty{
 .product-qty option {
 	border: 1px solid #EEE;
 }
-.btn_form form input[type="submit"] {
+.btn_form input[type="submit"] {
 	cursor: pointer;
 	border: none;
 	outline: none;
@@ -1292,7 +1292,7 @@ ul.product-qty{
 	transition: all 0.3s ease-in-out;
 	margin-top: 2em;
 }
-.btn_form form input[type="submit"]:hover{
+.btn_form input[type="submit"]:hover{
 	background: #ee4a02;
 }
 h3.like, h3.recent{
@@ -2279,7 +2279,7 @@ i.pin {
 h3.like, h3.recent {
 	font-size: 1.2em;
 }
-.btn_form form input[type="submit"] {
+.btn_form input[type="submit"] {
 	font-size: 0.85em;
 	padding: 10px 10px;
 }

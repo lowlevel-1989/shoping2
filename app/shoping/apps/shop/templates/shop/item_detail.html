@@ -35,22 +35,26 @@
 			<li><a href="#">32</a></li>
 			<li><a href="#">34</a></li>
 		</ul>
-		<ul class="product-qty">
-			<span>Quantity:</span>
-			<select>
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-				<option>6</option>
-			</select>
-		</ul>
-		<div class="btn_form">
-			<form>
+		<form action="{% url 'carshop' %}" method="post">
+			{% csrf_token %}
+
+			<input type="hidden" name="action" value="add" />
+			<input type="hidden" name="item" value={{item.pk}} />
+			<ul class="product-qty">
+				<span>Quantity:</span>
+				<select name="quantity">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+				</select>
+			</ul>
+			<div class="btn_form">
 				<input type="submit" value="Add to Cart" title="">
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </div>
 {% endblock content %}

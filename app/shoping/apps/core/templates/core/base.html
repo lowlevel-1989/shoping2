@@ -5,6 +5,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 {% load static %}
+{% load show_carshop %}
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -71,33 +72,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- end header -->
 
 				<!-- carshop -->
-				<div class="apparel_box">
-
-					<ul class="login">
-						<li class="login_text"><a href="{% url 'login' %}">Login</a></li>
-						<li class="wish"><a href="checkout.html">Wish List</a></li>
-						<div class='clearfix'></div>
-					</ul>
-
-					<div class="cart_bg">
-						<ul class="cart">
-							<i class="cart_icon"></i><p class="cart_desc">$1459.50<br><span class="yellow">2 items</span></p>
-							<div class='clearfix'></div>
-						</ul>
-						<ul class="product_control_buttons">
-							<li><a href="#"><img src="{% static 'core/images/close.png' %}" alt=""/></a></li>
-							<li><a href="#">Edit</a></li>
-						</ul>
-						<div class='clearfix'></div>
-					</div>
-
-					<ul class="quick_access">
-						<li class="view_cart"><a href="checkout.html">View Cart</a></li>
-						<li class="check"><a href="checkout.html">Checkout</a></li>
-						<div class='clearfix'></div>
-					</ul>
-
-				</div>
+				{% show_carshop request %}
 				<!-- end carshop -->
 
 			</div> <!-- close container -->
