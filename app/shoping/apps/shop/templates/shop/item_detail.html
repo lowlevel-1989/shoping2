@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% block content %}
+<br />
+<div class="singel_right">
+	<div class="cont1 span_1_of_a1">
+		<img src="{{ item.cover.url }}" class="img-responsive" alt=""/>
+	</div>
+	<div class="cont1 span_2_of_a1">
+		<h1>Peeky Cropped</h1>
+		<ul class="rating">
+			<li><a class="product-rate" href="#"> <label> </label></a> <span> </span></li>
+			<li><a href="#">1 Review(s) Add Review</a></li>
+			<div class="clearfix"></div>
+		</ul>
+		<div class="price_single">
+			<span class="reducedfrom">14000.00 COP</span>
+			<span class="actual">{{ item.price }} COP</span>
+		</div>
+		<ul class="size">
+			<h3>Size</h3>
+			<li><a href="#">25</a></li>
+			<li><a href="#">26</a></li>
+			<li><a href="#">27</a></li>
+			<li><a href="#">28</a></li>
+			<li><a href="#">29</a></li>
+			<li><a href="#">30</a></li>
+			<li><a href="#">31</a></li>
+			<li><a href="#">32</a></li>
+			<li><a href="#">33</a></li>
+		</ul>
+		<ul class="size">
+			<h3>Length</h3>
+			<li><a href="#">32</a></li>
+			<li><a href="#">34</a></li>
+		</ul>
+		<ul class="product-qty">
+			<span>Quantity:</span>
+			<select>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+			</select>
+		</ul>
+		<div class="btn_form">
+			<form>
+				<input type="submit" value="Add to Cart" title="">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

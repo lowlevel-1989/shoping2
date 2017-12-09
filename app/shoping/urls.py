@@ -20,6 +20,7 @@ from shoping.apps.core.views import CreateUserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('shoping.apps.shop.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', CreateUserView.as_view(), name='register'),
 ]

@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS = [
     'shoping.apps.core',
+    'shoping.apps.epayco',
+    'shoping.apps.shop',
+    'shoping.apps.carshop',
 ] + INSTALLED_APPS
 
 MIDDLEWARE = [

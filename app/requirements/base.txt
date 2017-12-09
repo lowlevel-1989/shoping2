@@ -2,3 +2,4 @@ Django==2.0
 pytz==2017.3
 psycopg2==2.7.3.2
 gunicorn==19.7.1
+Pillow==4.3.0
