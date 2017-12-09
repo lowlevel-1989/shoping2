@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from shoping.apps.core.views import CreateUserView
+from shoping.apps.core.views import CartShowView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('shoping.apps.shop.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', CreateUserView.as_view(), name='register'),
+    path('cart/show/', CartShowView.as_view(), name='carton-show'),
 ]
 
 

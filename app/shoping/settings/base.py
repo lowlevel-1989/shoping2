@@ -39,11 +39,16 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS = [
+    'carton',
+] + INSTALLED_APPS
+
+INSTALLED_APPS = [
     'shoping.apps.core',
     'shoping.apps.epayco',
-    'shoping.apps.shop',
-    'shoping.apps.carshop',
+    'shoping.apps.product',
 ] + INSTALLED_APPS
+
+CART_PRODUCT_MODEL = 'shoping.apps.product.models.Product'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
