@@ -1,7 +1,8 @@
 {% extends 'core/base.html' %}
 
 {% load static %}
-{% load get_quantity %}
+{% load carton_tags %}
+{% get_cart as cart %}
 {% block content %}
 
 <br />
@@ -11,22 +12,24 @@
 			<th>Name</th>
 			<th>Price</th>
 			<th>Quantity</th>
+			<th>SubTotal</th>
 			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
-		{% for item in object_list %}
+		{% for item in cart.items %}
 		<tr>
-			<td>{{ item.name }}</td>
-			<td>{{ item.price }} COP</td>
-			<td>{{ item.pk | get_quantity:object_qt_list }}</td>
+			<td>{{ item.product.name }}</td>
+			<td>{{ item.product.price }} COP</td>
+			<td>{{ item.quantity }}</td>
+			<td>{{ item.subtotal }}</td>
 			<td><span style="cursor:pointer" class="label label-danger">delete</span></td>
 		</tr>
 		{% empty %}
 			<div class="col-sm-12">No hay articulos todavia.</div>
 		{% endfor %}
 		<tr>
-			<td class="align-right" colspan="3"><strong>total:<strong> {{ total }} COP</td>
+			<td class="align-right" colspan="3"><strong>total:<strong> {{ cart.total }} COP</td>
 		</tr>
 	</tbody>
 </table>

@@ -11,21 +11,21 @@
 	</div>
 	<div class="clearfix"></div>
 	<ul>
-		{% for item in object_list %}
+		{% for product in object_list %}
 		<li>
-		<a class="cbp-vm-image" href="{% url 'item-detail' item.pk %}">
+		<a class="cbp-vm-image" href="{% url 'product-detail' product.pk %}">
 			<div class="view view-first">
 				<div class="inner_content clearfix">
 					<div class="product_image">
-						<img src="{{ item.cover.url }}" class="img-responsive" alt=""/>
+						<img src="{{ product.cover.url }}" class="img-responsive" alt=""/>
 						<div class="mask">
 							<div class="info">Quick View</div>
 						</div>
 						<div class="product_container">
 							<div class="cart-left">
-								<p class="title">{{ item.name }}</p>
+								<p class="title">{{ product.name }}</p>
 							</div>
-							<div class="price">{{ item.price }} COP</div>
+							<div class="price">{{ product.price }} COP</div>
 							<div class="clearfix"></div>
 						</div>
 					</div>

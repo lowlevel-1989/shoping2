@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'shoping.apps.core',
     'shoping.apps.epayco',
     'shoping.apps.product',
+    'shoping.apps.shop',
 ] + INSTALLED_APPS
 
 CART_PRODUCT_MODEL = 'shoping.apps.product.models.Product'

@@ -5,7 +5,7 @@
 <br />
 <div class="singel_right">
 	<div class="cont1 span_1_of_a1">
-		<img src="{{ item.cover.url }}" class="img-responsive" alt=""/>
+		<img src="{{ product.cover.url }}" class="img-responsive" alt=""/>
 	</div>
 	<div class="cont1 span_2_of_a1">
 		<h1>Peeky Cropped</h1>
@@ -16,7 +16,7 @@
 		</ul>
 		<div class="price_single">
 			<span class="reducedfrom">14000.00 COP</span>
-			<span class="actual">{{ item.price }} COP</span>
+			<span class="actual">{{ product.price }} COP</span>
 		</div>
 		<ul class="size">
 			<h3>Size</h3>
@@ -35,11 +35,11 @@
 			<li><a href="#">32</a></li>
 			<li><a href="#">34</a></li>
 		</ul>
-		<form action="{% url 'carshop' %}" method="post">
+		<form action="" method="post">
 			{% csrf_token %}
 
 			<input type="hidden" name="action" value="add" />
-			<input type="hidden" name="item" value={{item.pk}} />
+			<input type="hidden" name="item" value={{product.pk}} />
 			<ul class="product-qty">
 				<span>Quantity:</span>
 				<select name="quantity">

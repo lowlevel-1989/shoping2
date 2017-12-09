@@ -7,4 +7,4 @@ celery==4.1
 django-celery-beat==1.1
 https://github.com/stuartaccent/django-celery-results/zipball/master#egg=django-celery-results
 redis==2.10
-https://github.com//lazybird/django-carton/zipball/1.2.1#egg=django-carton
+https://github.com/formatcom/django-carton/zipball/master#egg=django-carton

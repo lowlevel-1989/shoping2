@@ -5,7 +5,6 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 {% load static %}
-{% load show_carshop %}
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -53,7 +52,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- header -->
 				<div class="header-top">
 					<div class="logo">
-						<a href="{% url 'home' %}"><img src="{% static 'core/images/logo.png' %}" alt=""/></a>
+						<a href="{% url 'product-list' %}"><img src="{% static 'core/images/logo.png' %}" alt=""/></a>
 					</div>
 					<div class="header_right">
 						<ul class="social">
@@ -72,7 +71,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- end header -->
 
 				<!-- carshop -->
-				{% show_carshop request %}
 				<!-- end carshop -->
 
 			</div> <!-- close container -->
