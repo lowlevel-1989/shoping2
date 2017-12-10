@@ -35,11 +35,10 @@
 			<li><a href="#">32</a></li>
 			<li><a href="#">34</a></li>
 		</ul>
-		<form action="" method="post">
+		<form action="{% url 'carton' %}" method="post">
 			{% csrf_token %}
 
-			<input type="hidden" name="action" value="add" />
-			<input type="hidden" name="item" value={{product.pk}} />
+			<input type="hidden" name="product" value={{product.pk}} />
 			<ul class="product-qty">
 				<span>Quantity:</span>
 				<select name="quantity">

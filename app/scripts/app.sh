@@ -5,7 +5,7 @@ mkdir /home/app/logs > /dev/null 2>&1
 
 touch /home/app/logs/gunicorn-access.log
 touch /home/app/logs/gunicorn.log
-touch /home/app/logs/app.log
+#touch /home/app/logs/app.log
 tail -n 0 -f /home/app/logs/*.log &
 
 #python manage.py migrate

@@ -26,3 +26,20 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler'
+        },
+    },
+    'loggers': {
+        'django': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            },
+        },
+    }

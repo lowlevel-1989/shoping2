@@ -2,8 +2,9 @@
 
 {% load static %}
 {% load carton_tags %}
-{% get_cart as cart %}
 {% block content %}
+
+{% get_cart as cart %}
 
 <br />
 <table class="table table-striped table-hover">
@@ -23,7 +24,14 @@
 			<td>{{ item.product.price }} COP</td>
 			<td>{{ item.quantity }}</td>
 			<td>{{ item.subtotal }}</td>
-			<td><span style="cursor:pointer" class="label label-danger">delete</span></td>
+			<td>
+				<form method="post">
+					{% csrf_token %}
+					<input type="hidden" name="action" value="delete" />
+					<input type="hidden" name="product" value={{ item.product.pk }} />
+					<input type="submit" class="btn btn-danger" value="delete" />
+				</form>
+			</td>
 		</tr>
 		{% empty %}
 			<div class="col-sm-12">No hay articulos todavia.</div>
