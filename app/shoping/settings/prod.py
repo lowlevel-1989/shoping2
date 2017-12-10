@@ -7,6 +7,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=False
 
+STATIC_ROOT = 'static'
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

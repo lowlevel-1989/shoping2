@@ -6,6 +6,9 @@ services:
       service: nginx
     links:
       - app
+    volumes:
+      - ./app:/app
+      - ./media:/app/media
     ports:
       - "3002:80"
 
@@ -19,6 +22,9 @@ services:
     links:
       - redis
       - postgres
+    volumes:
+      - ./app:/app
+      - ./media:/app/media
     depends_on:
       - postgres
       - redis
@@ -33,6 +39,9 @@ services:
     links:
       - redis
       - postgres
+    volumes:
+      - ./app:/app
+      - ./media:/app/media
     depends_on:
       - app
 
@@ -43,6 +52,9 @@ services:
     build:
       args:
         - DJANGO_ENV=prod
+    volumes:
+      - ./app:/app
+      - ./media:/app/media
     depends_on:
       - worker
 
