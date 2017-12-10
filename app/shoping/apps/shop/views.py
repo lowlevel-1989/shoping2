@@ -20,14 +20,19 @@ class CartShowView(TemplateView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+        delete = action == 'delete'
+        clear = action == 'clear'
+
         cart = Cart(request.session)
-        delete = request.POST.get('action') == 'delete'
-        product = Product.objects.get(pk=request.POST.get('product'))
+        product = Product.objects.filter(pk=request.POST.get('product')).first()
         quantity = request.POST.get('quantity', 1)
-        price = product.price
+
         if delete:
             cart.remove(product)
+        elif clear:
+            cart.clear()
         else:
-            cart.add(product, price, quantity)
+            cart.add(product, product.price, quantity)
         return super().get(request, *args, **kwargs)
 
