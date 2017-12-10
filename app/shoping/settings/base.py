@@ -39,6 +39,8 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS = [
+    'django_celery_beat',
+    'django_celery_results',
     'carton',
 ] + INSTALLED_APPS
 
@@ -133,3 +135,7 @@ LOGIN_REDIRECT_URL='/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
+
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'

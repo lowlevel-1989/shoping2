@@ -36,4 +36,4 @@ services:
       - ./app:/app
     env_file: .env
     restart: on-failure
-    command: su -m app -c "celery -A $PROJECT_NAME beat -l info -S django"
+    command: su -m app -c "celery -A $PROJECT_NAME beat -l info --pidfile=/tmp/celery.pid"
