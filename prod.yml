@@ -13,6 +13,8 @@ services:
     extends:
       file: base.yml
       service: app
+    environment:
+      - DJANGO_SETTINGS_MODULE=shoping.settings.prod
     build:
       args:
         - DJANGO_ENV=prod
@@ -27,6 +29,8 @@ services:
     extends:
       file: base.yml
       service: worker
+    environment:
+      - DJANGO_SETTINGS_MODULE=shoping.settings.prod
     build:
       args:
         - DJANGO_ENV=prod
@@ -40,6 +44,8 @@ services:
     extends:
       file: base.yml
       service: beat
+    environment:
+      - DJANGO_SETTINGS_MODULE=shoping.settings.prod
     build:
       args:
         - DJANGO_ENV=prod
