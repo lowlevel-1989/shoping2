@@ -81,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'formatcom.wsgi.application'
+WSGI_APPLICATION = '{0}.wsgi.application'.format(PROJECT_NAME)
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
