@@ -8,4 +8,4 @@ django-celery-beat==1.1
 https://github.com/stuartaccent/django-celery-results/zipball/master#egg=django-celery-results
 redis==2.10.6
 https://github.com/formatcom/django-carton/zipball/master#egg=django-carton
-django-sendgrid-v5==0.6.8
+https://github.com/sklarsa/django-sendgrid-v5/zipball/master#egg=django-sengrid-v5
