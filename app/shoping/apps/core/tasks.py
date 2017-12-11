@@ -18,7 +18,7 @@ def task_mail_register(pk=None):
 
     msg.template_id = '5c97418c-60d4-4694-be9e-2eb5e5390ce6'
     msg.substitutions = {
-        ':username', user.username
+        ':username': user.username
     }
     msg.send()
     return user
