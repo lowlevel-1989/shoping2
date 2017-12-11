@@ -21,4 +21,4 @@ def task_mail_register(pk=None):
         ':username': user.username
     }
     msg.send()
-    return user
+    return user.pk
