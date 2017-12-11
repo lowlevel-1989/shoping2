@@ -2,6 +2,7 @@ from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=True
+SENDGRID_SANDBOX_MODE_IN_DEBUG = DEBUG
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda self: True

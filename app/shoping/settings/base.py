@@ -139,3 +139,8 @@ STATIC_URL = '/static/'
 CELERY_BROKER_URL = 'redis://redis:6379'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
