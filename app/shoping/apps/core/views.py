@@ -1,5 +1,5 @@
 from django.views.generic.edit import CreateView
-from .tasks import task_mail_register
+from .tasks import task_sendgrid_mail
 from .forms import UserCreationForm
 
 
@@ -11,7 +11,7 @@ class CreateUserView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        task_mail_register.delay(self.object.pk)
+        task_sendgrid_mail.delay('register', self.object.pk)
         return response
 
 

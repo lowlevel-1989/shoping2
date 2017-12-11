@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'shoping.apps.epayco',
     'shoping.apps.product',
     'shoping.apps.shop',
+    'shoping.apps.sendgrid_template',
 ] + INSTALLED_APPS
 
 CART_PRODUCT_MODEL = 'shoping.apps.product.models.Product'
@@ -142,5 +143,5 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 
-SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
