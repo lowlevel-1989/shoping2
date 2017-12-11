@@ -1,0 +1,44 @@
+{% extends 'shop/base.html' %}
+
+
+{% block header %}
+    <script>
+        window.addEventListener('load', function() {
+            window.document.frm_botonePayco.submit(); return;
+        })
+    </script>
+{% endblock header %}
+
+{% block content %}
+    <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php">
+        <!-- Id del comercio propietario de la aplicación -->
+        <input name="p_cust_id_cliente" type="hidden" value="{{p_cust_id_cliente}}">
+        <!-- Llave de seguridad del comercio propietario de la aplicación -->
+        <input name="p_key" type="hidden" value="{{p_key}}">
+        <!-- Id de la factura -->
+        <input name="p_id_invoice" type="hidden" value="{{p_id_invoice}}">
+        <!-- Descripción del producto -->
+        <input name="p_description" type="hidden" value="{{p_description}}">
+        <!-- Código de la moneda (COP,USD) -->
+        <input name="p_currency_code" type="hidden" value="{{p_currency_code}}">
+        <!-- Valor total del producto -->
+        <input name="p_amount" id="p_amount" type="hidden" value="{{p_amount}}">
+        <!-- IVA -->
+        <input name="p_tax" id="p_tax" type="hidden" value="{{p_tax}}">
+        <!-- Valor sin IVA -->
+        <input name="p_amount_base" type="hidden" value="{{p_amount_base}}">
+        <!-- Fase de integración (TRUE: en pruebas, FALSE: en producción) -->
+        <input name="p_test_request" type="hidden" value="{{p_test_request}}">
+        <!-- firma para validar los datos y no sean modificados
+             desde el cliente web, cifrado con md5
+
+            p_signature = (p_cust_id_cliente+p_key+p_id_invoice+p_amount+p_currency_code)
+            separadas por el carácter '^'
+        -->
+        <input name="p_signature" type="hidden" value="{{p_signature}}">
+
+        <input name="p_url_response" type="hidden" value="{{p_url_response}}">
+        <input name="p_url_confirmation" type="hidden" value="{{p_url_confirmation}}">
+
+    </form>
+{% endblock content %}

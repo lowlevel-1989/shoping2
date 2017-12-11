@@ -1,14 +1,159 @@
+import hashlib
+from decimal import Decimal
+from django.http import Http404
+from django.urls import reverse
 from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from carton.cart import Cart
 from shoping.apps.product.models import Product
+from shoping.apps.ticket.models import Ticket, Status
+from shoping.apps.epayco.models import EpayCo
 
 class ProductListView(ListView):
     model = Product
 
 class ProductDetailView(DetailView):
     model = Product
+
+class EpaycoView(LoginRequiredMixin, DetailView):
+    """
+    METHOD GET GENERATE FORM EPAYCO
+    METHOD POST RESPONSE EPAYCO
+    """
+
+    template_name = {
+        'GET': 'shop/epayco.html',
+        'POST': 'shop/ticket.html'
+    }
+
+    http_method_names = ('get', 'post', )
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_login_url(self):
+        if self.login_url:
+            return super().get_login_url()
+        return reverse('login')
+
+    def get_template_names(self):
+        self.template_name = self.template_name[self.request.method]
+        return super().get_template_names()
+
+    def get(self, request, *args, **kwargs):
+
+        ticket = self.get_object()
+        epayco = EpayCo.objects.first()
+
+        p_description = 'demo-app-co ePayCo'
+        p_cust_id_cliente = epayco.client_id
+        p_key = epayco.p_key
+        p_id_invoice = '{}'.format(ticket.pk)
+        p_amount = '{}'.format(ticket.total)
+        p_currency_code = epayco.p_currency_code
+
+        signature = '{0}^{1}^{2}^{3}^{4}'.format(
+            p_cust_id_cliente,
+            p_key,
+            p_id_invoice,
+            p_amount,
+            p_currency_code
+        )
+
+        h = hashlib.md5()
+        h.update(signature.encode('utf-8'))
+        p_signature = h.hexdigest()
+
+        p_tax = 0
+        p_amount_base = 0
+        p_test_request = 'TRUE' if epayco.test else 'FALSE'
+
+        p_url_response = epayco.url_response
+        p_url_confirmation = epayco.url_confirmation
+
+        context = {
+            'p_cust_id_cliente': p_cust_id_cliente,
+            'p_key': p_key,
+            'p_id_invoice': p_id_invoice,
+            'p_amount': p_amount,
+            'p_currency_code': p_currency_code,
+            'p_signature': p_signature,
+            'p_tax': p_tax,
+            'p_amount_base': p_amount_base,
+            'p_test_request': p_test_request,
+            'p_url_response': p_url_response,
+            'p_url_confirmation': p_url_confirmation,
+            'p_description': p_description
+        }
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        epayco = EpayCo.objects.first()
+        x_signature = request.POST.get('x_signature')
+
+        x_cust_id_cliente = request.POST.get('x_cust_id_cliente')
+        x_key = epayco.p_key
+        x_id_invoice = request.POST.get('x_id_invoice')
+        x_ref_payco = request.POST.get('x_ref_payco')
+        x_transaction_id = request.POST.get('x_transaction_id')
+        x_amount = request.POST.get('x_amount')
+        x_currency_code = request.POST.get('x_currency_code')
+
+        x_cod_response = request.POST.get('x_cod_response')
+
+        signature = '{0}^{1}^{2}^{3}^{4}^{5}'.format(
+            x_cust_id_cliente,
+            x_key,
+            x_ref_payco,
+            x_transaction_id,
+            x_amount,
+            x_currency_code
+        )
+
+        h = hashlib.sha256()
+        h.update(signature.encode('utf-8'))
+        v_signature = h.hexdigest()
+
+        ticket = self.get_object(int(x_id_invoice))
+
+        # ticket valido
+        if (ticket and
+                v_signature == x_signature and
+                ticket.total == Decimal(x_amount)):
+
+            ticket.status = Status(int(x_cod_response))
+            ticket.save()
+        # ticket invalido
+        else:
+            if ticket:
+                ticket.status = Status(Status.FAILED)
+                ticket.save()
+            raise Http404
+
+        context = self.get_context_data(object=ticket)
+        return self.render_to_response(context)
+
+    def get_object(self, pk=None):
+        if pk:
+            return ticket.object.filter(pk=pk).first()
+        else:
+            cart = Cart(self.request.session)
+            ticket = Ticket()
+            ticket.total = cart.total
+            ticket.status = Status(Status.PENDING)
+            ticket.save()
+            for item in cart.items:
+                ticket.items.create(
+                    product=item.product,
+                    quantity=item.quantity
+                )
+            cart.clear()
+        return ticket
 
 class CartShowView(TemplateView):
     template_name = 'shop/cart_list.html'

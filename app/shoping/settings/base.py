@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'shoping.apps.product',
     'shoping.apps.shop',
     'shoping.apps.sendgrid_template',
+    'shoping.apps.ticket',
 ] + INSTALLED_APPS
 
 CART_PRODUCT_MODEL = 'shoping.apps.product.models.Product'

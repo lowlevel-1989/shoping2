@@ -1,10 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% load static %}
-{% load carton_tags %}
 {% block content %}
-
-{% get_cart as cart %}
 
 <br />
 <table class="table table-striped table-hover">
@@ -18,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for item in cart.items %}
+		{% for item in ticket.items.all %}
 		<tr>
 			<td>{{ item.product.name }}</td>
 			<td>{{ item.product.price }} COP</td>
@@ -37,12 +34,8 @@
 			<div class="col-sm-12">No hay articulos todavia.</div>
 		{% endfor %}
 		<tr>
-			<td class="align-right" colspan="3"><strong>total:<strong> {{ cart.total }} COP</td>
+			<td class="align-right" colspan="3"><strong>total:<strong> {{ ticket.total }} COP</td>
 		</tr>
 	</tbody>
 </table>
-<form action="{% url 'epayco' %}">
-	<input type="image"
-		src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco2.png" />
-</form>
 {% endblock content %}
