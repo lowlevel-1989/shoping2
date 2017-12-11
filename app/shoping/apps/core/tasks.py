@@ -12,7 +12,7 @@ def task_mail_register(pk=None):
     user = User.objects.get(pk=pk)
     msg = EmailMessage(
         subject='Register',
-        body='hello work',
+        body=' ',
         from_email=settings.EMAIL_HOST_USER,
         to=[user.email],
     )
