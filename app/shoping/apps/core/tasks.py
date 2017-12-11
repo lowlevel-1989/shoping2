@@ -13,7 +13,7 @@ def task_sendgrid_mail(
         template_name=None, user_pk=None,
         ticket_pk=None ):
 
-    user = User.objects.get(pk=pk)
+    user = User.objects.get(pk=user_pk)
 
     template = Sendgrid.objects.filter(name=template_name).first()
 
