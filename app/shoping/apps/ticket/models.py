@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from shoping.apps.product.models import Product
 
 
@@ -41,6 +42,12 @@ class ProductQuantity(models.Model):
 
 
 class Ticket(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     items = models.ManyToManyField(ProductQuantity)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.ForeignKey(Status, models.PROTECT)

@@ -24,5 +24,9 @@ class Sendgrid(models.Model):
         max_length=255,
     )
 
+    class Meta:
+        verbose_name = 'Sendgrid'
+        verbose_name_plural = 'Sendgrid'
+
     def __str__(self):
         return self.name

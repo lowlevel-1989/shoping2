@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import AccessMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from carton.cart import Cart
@@ -19,7 +20,14 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
 
-class EpaycoView(LoginRequiredMixin, DetailView):
+class TicketDetailView(LoginRequiredMixin, DetailView):
+    model = Ticket
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=request.user)
+
+class EpaycoView(AccessMixin, DetailView):
     """
     METHOD GET GENERATE FORM EPAYCO
     METHOD POST RESPONSE EPAYCO
@@ -34,7 +42,14 @@ class EpaycoView(LoginRequiredMixin, DetailView):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
+        if (request.is_ajax()
+                and request.method == 'POST'
+                or request.user.is_authenticated):
+            # no valida auth si el request viene por POST AJAX
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()
+
 
     def get_login_url(self):
         if self.login_url:
@@ -154,6 +169,7 @@ class EpaycoView(LoginRequiredMixin, DetailView):
             if cart.is_empty:
                 return None
             ticket = Ticket()
+            ticker.user = self.request.user
             ticket.total = cart.total
             ticket.status = Status(Status.PENDING)
             ticket.save()
