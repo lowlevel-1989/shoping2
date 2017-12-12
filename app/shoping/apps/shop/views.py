@@ -178,9 +178,11 @@ class CartShowView(TemplateView):
         quantity = request.POST.get('quantity', 1)
 
         if delete:
-            cart.remove(product)
+            if cart.is_empty is False:
+                cart.remove(product)
         elif clear:
-            cart.clear()
+            if cart.is_empty is False:
+                cart.clear()
         else:
             cart.add(product, product.price, quantity)
 
