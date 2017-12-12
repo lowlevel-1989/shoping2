@@ -169,7 +169,7 @@ class EpaycoView(AccessMixin, DetailView):
             if cart.is_empty:
                 return None
             ticket = Ticket()
-            ticker.user = self.request.user
+            ticket.user = self.request.user
             ticket.total = cart.total
             ticket.status = Status(Status.PENDING)
             ticket.save()
