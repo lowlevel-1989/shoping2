@@ -142,7 +142,8 @@ class EpaycoView(LoginRequiredMixin, DetailView):
                 ticket.save()
             raise Http404
 
-        context = self.get_context_data(object=ticket)
+        self.object = ticket
+        context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
 
     def get_object(self, pk=None):
