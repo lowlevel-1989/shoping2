@@ -147,7 +147,7 @@ class EpaycoView(LoginRequiredMixin, DetailView):
 
     def get_object(self, pk=None):
         if pk:
-            return Ticket.object.filter(pk=pk).first()
+            return Ticket.objects.filter(pk=pk).first()
         else:
             cart = Cart(self.request.session)
             if cart.is_empty:
