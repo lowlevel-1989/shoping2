@@ -1,12 +1,5 @@
 {% extends 'core/base.html' %}
 
-
-<script>
-	window.addEventListener('load', function() {
-		window.document.frm_botonePayco.submit(); return;
-	})
-</script>
-
 {% block content %}
     <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php">
         <!-- Id del comercio propietario de la aplicación -->
@@ -39,4 +32,7 @@
         <input name="p_url_confirmation" type="hidden" value="{{p_url_confirmation}}">
 
     </form>
+
+	<!-- autoenvio el form -->
+	<script> window.document.frm_botonePayco.submit(); </script>
 {% endblock content %}
