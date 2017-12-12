@@ -132,8 +132,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL='/'
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
@@ -143,6 +141,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+LOGIN_REDIRECT_URL='/'
 
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")

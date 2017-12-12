@@ -1,13 +1,11 @@
-{% extends 'shop/base.html' %}
+{% extends 'core/base.html' %}
 
 
-{% block header %}
-    <script>
-        window.addEventListener('load', function() {
-            window.document.frm_botonePayco.submit(); return;
-        })
-    </script>
-{% endblock header %}
+<script>
+	window.addEventListener('load', function() {
+		window.document.frm_botonePayco.submit(); return;
+	})
+</script>
 
 {% block content %}
     <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php">

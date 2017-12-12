@@ -19,8 +19,9 @@
 		<p>If you have an account with us, please log in.</p>
 
 		{{ form.non_field_errors }}
-		<form action="{% url 'login' %}" method="post">
+		<form action="{{ request.get_full_path }}" method="post">
 			{% csrf_token %}
+			<input type="hidden" name="next" value="{{ next }}" />
 			<div>
 				{{ form.username.errors }}
 				<span>Username</span>

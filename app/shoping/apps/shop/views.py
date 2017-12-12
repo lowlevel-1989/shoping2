@@ -39,7 +39,11 @@ class EpaycoView(LoginRequiredMixin, DetailView):
     def get_login_url(self):
         if self.login_url:
             return super().get_login_url()
-        return reverse('login')
+        return '{}?{}={}'.format(
+            reverse('login'),
+            self.redirect_field_name,
+            self.request.path
+        )
 
     def get_template_names(self):
         self.template_name = self.template_name[self.request.method]
@@ -49,6 +53,9 @@ class EpaycoView(LoginRequiredMixin, DetailView):
 
         ticket = self.get_object()
         epayco = EpayCo.objects.first()
+
+        if ticket is None:
+            raise Http404
 
         p_description = 'demo-app-co ePayCo'
         p_cust_id_cliente = epayco.client_id
@@ -143,6 +150,8 @@ class EpaycoView(LoginRequiredMixin, DetailView):
             return ticket.object.filter(pk=pk).first()
         else:
             cart = Cart(self.request.session)
+            if cart.is_empty:
+                return None
             ticket = Ticket()
             ticket.total = cart.total
             ticket.status = Status(Status.PENDING)
