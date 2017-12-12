@@ -47,7 +47,7 @@ class Ticket(models.Model):
 
     def save(self, *args, **kwargs):
         if self.pk and self.items:
-            self.total = sum([item.product.subtotal for item in self.items.all()])
+            self.total = sum([item.subtotal for item in self.items.all()])
         super().save(*args, **kwargs)
 
     def __str__(self):
