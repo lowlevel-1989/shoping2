@@ -156,7 +156,7 @@ class EpaycoView(AccessMixin, DetailView):
             if (ticket.status.pk in [
                     Status.REJECTE,
                     Status.FAILED]):
-                messages.warning(request, 'decline card.', tags='danger')
+                messages.warning(request, 'decline card.')
             else:
                 messages.success(request, 'thanks for your purchase.')
 
@@ -165,7 +165,7 @@ class EpaycoView(AccessMixin, DetailView):
             if ticket:
                 ticket.status = Status(Status.FAILED)
                 ticket.save()
-                messages.error(request, 'invalid ticket.', tags='danger')
+                messages.error(request, 'invalid ticket.')
             else:
                 raise Http404
 

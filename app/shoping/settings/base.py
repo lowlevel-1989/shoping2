@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+from django.contrib.messages import constants as messages
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -148,3 +148,7 @@ SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 
 GOOGLE_ANALYTICS_ID = os.environ.get('GOOGLE_ANALYTICS_ID')
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
