@@ -177,7 +177,7 @@ class EpaycoView(AccessMixin, DetailView):
             ticket.user.pk, ticket.pk, next_url=next_url)
 
         self.object = ticket
-        context = self.get_context_data(object=self.object)
+        context = self.get_context_data(object=ticket)
         return self.render_to_response(context)
 
     def get_object(self, pk=None):
