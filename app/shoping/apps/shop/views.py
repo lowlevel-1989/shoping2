@@ -156,7 +156,7 @@ class EpaycoView(AccessMixin, DetailView):
             if (ticket.status.pk in [
                     Status.REJECTE,
                     Status.FAILED]):
-                messages.warning(request, 'decline card.', extra_tags='danger')
+                messages.warning(request, 'decline card.', tags='danger')
             else:
                 messages.success(request, 'thanks for your purchase.')
 
@@ -165,7 +165,7 @@ class EpaycoView(AccessMixin, DetailView):
             if ticket:
                 ticket.status = Status(Status.FAILED)
                 ticket.save()
-                messages.error(request, 'invalid ticket.', extra_tags='danger')
+                messages.error(request, 'invalid ticket.', tags='danger')
             else:
                 raise Http404
 
@@ -176,8 +176,7 @@ class EpaycoView(AccessMixin, DetailView):
         task_sendgrid_mail.delay('purchase',
             ticket.user.pk, ticket.pk, next_url=next_url)
 
-        self.object = ticket
-        context = self.get_context_data(object=ticket)
+        context = {'ticket': ticket}
         return self.render_to_response(context)
 
     def get_object(self, pk=None):
