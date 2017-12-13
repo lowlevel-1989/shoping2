@@ -42,9 +42,9 @@ def task_sendgrid_mail(
         ':next': next_url or ''
     }
 
-    items = ticket.items.all().aggregate(Sum('quantity'))['quantity__sum']
 
     if ticket:
+        items = ticket.items.all().aggregate(Sum('quantity'))['quantity__sum']
         substitutions.update({
             ':total': '{:.2f}'.format(ticket.total),
             ':items': '{}'.format(items)
