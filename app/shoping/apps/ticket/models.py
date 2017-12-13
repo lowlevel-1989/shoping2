@@ -51,6 +51,8 @@ class Ticket(models.Model):
     items = models.ManyToManyField(ProductQuantity)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     status = models.ForeignKey(Status, models.PROTECT)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if self.pk and self.items:

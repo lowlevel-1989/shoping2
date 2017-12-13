@@ -13,6 +13,8 @@ from carton.cart import Cart
 from shoping.apps.product.models import Product
 from shoping.apps.ticket.models import Ticket, Status
 from shoping.apps.epayco.models import EpayCo
+from shoping.apps.core.tasks import task_sendgrid_mail
+from django.contrib import messages
 
 class ProductListView(ListView):
     model = Product
@@ -150,12 +152,28 @@ class EpaycoView(AccessMixin, DetailView):
 
             ticket.status = Status(int(x_cod_response))
             ticket.save()
+            if (ticket.status.pk in [
+                    Status.REJECTE,
+                    Status.FAILED]):
+                messages.warning(request, 'decline card.', extra_tags='danger')
+            else:
+                messages.success(request, 'thanks for your purchase.')
+
         # ticket invalido
         else:
             if ticket:
                 ticket.status = Status(Status.FAILED)
                 ticket.save()
-            raise Http404
+                messages.error(request, 'invalid ticket.', extra_tags='danger')
+            else:
+                raise Http404
+
+        # genera url y mail para notificar que el pedido a cambiado de estado
+        next_url = request.build_absolute_uri(
+            reverse('ticket_detail', args=[ticket.pk])
+        )
+        task_sendgrid_mail.delay('purchase',
+            ticket.user.pk, ticket.pk, next_url=next_url)
 
         self.object = ticket
         context = self.get_context_data(object=self.object)

@@ -3,7 +3,9 @@ from .models import Ticket
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('user', 'total', 'status',)
+    list_display = ('user', 'total',
+        'created_at', 'update_at', 'status',
+    )
     list_filter = ('status',)
     filter_horizontal = ('items',)
     actions = None
