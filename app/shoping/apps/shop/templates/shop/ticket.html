@@ -30,15 +30,17 @@
 			<td>{{ item.product.price }} COP</td>
 			<td>{{ item.quantity }}</td>
 			<td>{{ item.subtotal }}</td>
-			<td><a href="{% url 'ticket_detail' item.pk %}">open</a></td>
+			<td><a href="{% url 'product_detail' item.pk %}">open</a></td>
 		</tr>
 		{% endfor %}
 		<tr>
 			<td class="align-right" colspan="3"><strong>total:<strong> {{ ticket.total }} COP</td>
 		</tr>
+		{% if ticket.status %}
 		<tr>
 			<td class="align-right" colspan="3"><strong>status:<strong> {{ ticket.status.name }}</td>
 		</tr>
+		{% endif %}
 	</tbody>
 </table>
 {% endblock content %}

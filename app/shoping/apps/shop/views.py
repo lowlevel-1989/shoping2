@@ -23,6 +23,7 @@ class ProductDetailView(DetailView):
     model = Product
 
 class TicketDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'shop/ticket.html'
     model = Ticket
 
     def get_queryset(self):
