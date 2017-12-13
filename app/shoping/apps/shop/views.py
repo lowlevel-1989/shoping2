@@ -152,11 +152,10 @@ class EpaycoView(AccessMixin, DetailView):
                 ticket.total == Decimal(x_amount)):
 
             ticket.status = Status(int(x_cod_response))
-            ticket.save()
             if (ticket.status.pk in [
                     Status.REJECTE,
                     Status.FAILED]):
-                messages.warning(request, 'decline card.')
+                messages.error(request, 'decline card.')
             else:
                 messages.success(request, 'thanks for your purchase.')
 
@@ -164,7 +163,6 @@ class EpaycoView(AccessMixin, DetailView):
         else:
             if ticket:
                 ticket.status = Status(Status.FAILED)
-                ticket.save()
                 messages.error(request, 'invalid ticket.')
             else:
                 raise Http404
@@ -175,6 +173,9 @@ class EpaycoView(AccessMixin, DetailView):
         )
         task_sendgrid_mail.delay('purchase',
             ticket.user.pk, ticket.pk, next_url=next_url)
+
+        ticket.status = Status.objects.get(pk=ticket.status.pk)
+        ticket.save()
 
         context = {'ticket': ticket}
         return self.render_to_response(context)
