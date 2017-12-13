@@ -27,12 +27,12 @@ def task_sendgrid_mail(
 
     if template:
         msg.template_id = template.template_id
-        msg.categories = template.category and [template.category]
+        msg.categories = template.category != '' and [template.category]
 
     else:
         raise ValueError('no found template name: {}'.format(template_name))
 
-    msg.substitutions = {
+    substitutions = {
         ':username': user.username,
         ':email': user.email,
         ':first_name': user.first_name,
@@ -41,10 +41,12 @@ def task_sendgrid_mail(
     }
 
     if ticket:
-        msg.substitutions.update({
+        substitutions.update({
             ':total': '{:.2f}'.format(ticket.total),
             ':items': ticket.items.count()
         })
+
+    msg.substitutions = substitutions
 
     msg.send()
     context = {
