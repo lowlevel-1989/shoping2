@@ -52,6 +52,7 @@ def task_sendgrid_mail(
 
     msg.substitutions = substitutions
 
+    msg.content_subtype = 'html'
     msg.send()
     context = {
         'user': user.pk,
