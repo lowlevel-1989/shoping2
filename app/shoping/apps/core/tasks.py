@@ -42,7 +42,7 @@ def task_sendgrid_mail(
 
     if ticket:
         msg.substitutions.update({
-            ':total': ticket.total,
+            ':total': '{:.2f}'.format(ticket.total),
             ':items': ticket.items.count()
         })
 
