@@ -2,6 +2,7 @@ from celery import shared_task
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.db.models import Sum
 from shoping.apps.sendgrid_template.models import Sendgrid
 from shoping.apps.ticket.models import Ticket
 
@@ -41,10 +42,12 @@ def task_sendgrid_mail(
         ':next': next_url or ''
     }
 
+    items = ticket.items.all().aggregate(Sum('quantity'))['quantity__sum']
+
     if ticket:
         substitutions.update({
             ':total': '{:.2f}'.format(ticket.total),
-            ':items': '{}'.format(ticket.items.count())
+            ':items': '{}'.format(items)
         })
 
     msg.substitutions = substitutions
