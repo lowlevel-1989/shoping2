@@ -36,14 +36,14 @@ def task_sendgrid_mail(
         ':username': user.username,
         ':email': user.email,
         ':first_name': user.first_name,
-        ':last_name': user.last_name
+        ':last_name': user.last_name,
         ':next': next_url or ''
     }
 
     if ticket:
         msg.substitutions.update({
             ':total': ticket.total,
-            ':items': ticket.items.count(),
+            ':items': ticket.items.count()
         })
 
     msg.send()
