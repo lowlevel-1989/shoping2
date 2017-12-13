@@ -27,7 +27,7 @@ class TicketDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(user=request.user)
+        return queryset.filter(user=self.request.user)
 
 class EpaycoView(AccessMixin, DetailView):
     """
