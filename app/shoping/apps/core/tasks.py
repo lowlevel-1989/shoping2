@@ -27,7 +27,8 @@ def task_sendgrid_mail(
 
     if template:
         msg.template_id = template.template_id
-        msg.categories = template.category != '' and [template.category]
+        if template.category and template.category != '':
+            msg.categories = [template.category]
 
     else:
         raise ValueError('no found template name: {}'.format(template_name))
