@@ -222,7 +222,7 @@ class CartShowView(TemplateView):
             cart.add(product, product.price, quantity)
 
         if cart.is_empty:
-            return redirect('product-list')
+            return redirect('product_list')
 
         return super().get(request, *args, **kwargs)
 
